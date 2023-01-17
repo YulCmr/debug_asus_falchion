@@ -18,7 +18,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "usb_device.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -62,6 +61,30 @@ static void MX_ICACHE_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+int _write(int file, char *ptr, int len) {
+    static uint8_t rc = USBD_OK;
+
+    do {
+        rc = CDC_Transmit_FS((uint8_t*)ptr, len);
+    } while (USBD_BUSY == rc);
+
+    if (USBD_FAIL == rc) {
+        /// NOTE: Should never reach here.
+        /// TODO: Handle this error.
+        return 0;
+    }
+    return len;
+}
+
+// int fputc(int ch, FILE *f)
+// {
+//     if(ch == '\n') {
+//       uint8_t ret = '\r';
+//       CDC_Transmit_FS(&ret, 1);
+//     }
+//     CDC_Transmit_FS((uint8_t*)&ch, 1);
+//     return ch;
+// }
 
 /* USER CODE END 0 */
 
@@ -95,12 +118,16 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   MX_I2C2_Init();
-  MX_USART3_UART_Init();
+  // MX_USART3_UART_Init();
   MX_USB_Device_Init();
   MX_ICACHE_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_Delay(2000);
   /* USER CODE END 2 */
+
+  printf("\r\nStart !\r\n");
+
+  shell_start();
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -109,6 +136,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    //printf("[main]Hello World! \r\n");
+    printf("Hello World!\r\n");
+    HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
