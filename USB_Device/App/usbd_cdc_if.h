@@ -106,9 +106,9 @@ extern USBD_CDC_ItfTypeDef USBD_Interface_fops_FS;
   */
 
 uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
-uint8_t VCP_retrieveInputData(uint8_t *rx_buffer, uint8_t len, uint32_t timeout);
-/* USER CODE BEGIN EXPORTED_FUNCTIONS */
 
+/* USER CODE BEGIN EXPORTED_FUNCTIONS */
+uint8_t VCP_retrieveInputData(uint8_t *rx_buffer, uint8_t len, uint32_t timeout);
 /* USER CODE END EXPORTED_FUNCTIONS */
 
 /**
@@ -128,3 +128,4 @@ uint8_t VCP_retrieveInputData(uint8_t *rx_buffer, uint8_t len, uint32_t timeout)
 #endif
 
 #endif /* __USBD_CDC_IF_H__ */
+

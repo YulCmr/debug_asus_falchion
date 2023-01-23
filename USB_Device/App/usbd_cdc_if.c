@@ -89,13 +89,12 @@
 /* It's up to user to redefine and/or remove those define */
 /** Received data over USB are stored in this buffer      */
 uint8_t UserRxBufferFS[APP_RX_DATA_SIZE];
-static uint8_t UserRxLength;
 
 /** Data to send over USB CDC are stored in this buffer   */
 uint8_t UserTxBufferFS[APP_TX_DATA_SIZE];
 
 /* USER CODE BEGIN PRIVATE_VARIABLES */
-
+static uint8_t UserRxLength;
 /* USER CODE END PRIVATE_VARIABLES */
 
 /**
@@ -321,6 +320,7 @@ static int8_t CDC_TransmitCplt_FS(uint8_t *Buf, uint32_t *Len, uint8_t epnum)
   return result;
 }
 
+/* USER CODE BEGIN PRIVATE_FUNCTIONS_IMPLEMENTATION */
 uint8_t VCP_retrieveInputData(uint8_t *rx_buffer, uint8_t len, uint32_t timeout) {
   uint32_t start = HAL_GetTick();
   while(HAL_GetTick()-start < timeout) {
@@ -333,9 +333,6 @@ uint8_t VCP_retrieveInputData(uint8_t *rx_buffer, uint8_t len, uint32_t timeout)
 
   return ERROR;
 }
-
-/* USER CODE BEGIN PRIVATE_FUNCTIONS_IMPLEMENTATION */
-
 /* USER CODE END PRIVATE_FUNCTIONS_IMPLEMENTATION */
 
 /**
@@ -345,3 +342,4 @@ uint8_t VCP_retrieveInputData(uint8_t *rx_buffer, uint8_t len, uint32_t timeout)
 /**
   * @}
   */
+
