@@ -13,6 +13,44 @@ void shell_reset(int argc, char argv[8][16])
 	NVIC_SystemReset();
 }
 
+void gpio_handler(int argc, char argv[8][16])
+{
+
+	if(shell_check_cmd(argv[1], "0")) {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+	}
+	else if(shell_check_cmd(argv[1], "1")) {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+	}
+	else if(shell_check_cmd(argv[1], "2")) {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
+	}
+	else if(shell_check_cmd(argv[1], "3")) {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);
+	}
+	else if(shell_check_cmd(argv[1], "4")) {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+	}
+	else if(shell_check_cmd(argv[1], "5")) {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+	}
+
+	while(1) {
+		for(int i = 0; i < 16; i++) {
+			if(i%8==0 && i!=0) printf(" ");
+			printf("%01x ", (GPIOC->IDR>>i)&1);
+		}
+		printf("\r\n");
+		// for(int i = 0; i < 8; i++) {
+		// 	if(i%8==0 && i!=0) printf(" ");
+		// 	printf("%01x ", HAL_GPIO_ReadPin(GPIOB, i));
+		// }
+		// printf("\r\n");
+		HAL_Delay(300);
+	}
+	printf("\r\n");
+}
+
 void i2c_handler(int argc, char argv[8][16])
 {
 	I2C_HandleTypeDef hi2c;
@@ -73,6 +111,9 @@ uint8_t shell_process_cmd(char* cmd)
 	}
 	else if(shell_check_cmd(bdown[0], "i2c")) {
 		i2c_handler(j, bdown);
+	}
+	else if(shell_check_cmd(bdown[0], "gpio")) {
+		gpio_handler(j, bdown);
 	}
 
 	return 0;
