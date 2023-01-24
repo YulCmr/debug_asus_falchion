@@ -38,7 +38,7 @@ build/shell.o: Core/Src/shell.c Core/Inc/shell.h Core/Inc/main.h \
  Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
- Core/Inc/is31fl3737.h USB_Device/App/usb_device.h \
+ Core/Inc/is31fl3737.h Core/Inc/keyboard.h USB_Device/App/usb_device.h \
  Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
 Core/Inc/shell.h:
 Core/Inc/main.h:
@@ -85,5 +85,6 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
 Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
 Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:
 Core/Inc/is31fl3737.h:
+Core/Inc/keyboard.h:
 USB_Device/App/usb_device.h:
 Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:

@@ -47,7 +47,7 @@ const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,  KC_LWIN,  KC_LALT,                   KC_SPC,                             KC_RALT,   KC_NO,               KC_RCTL,        KC_BSPC,
         KC_INS,   KC_DEL,            KC_PGUP, KC_PGDN,                                                KC_DOWN,  KC_RGHT,   KC_LEFT,        KC_UP
     )
-  }
+  };
 
 // uint8_t isPowerOfTwo(uint16_t n) {
 //     return n && (!(n & (n - 1)));
@@ -78,7 +78,7 @@ void scan_matrix(void) {
   /* Read current matrix */
   for(int i = 0; i < MATRIX_ROWS; i++) {
     /* Turn off all rows */
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_ALL, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_All, GPIO_PIN_RESET);
     /* Turn on required row */
     HAL_GPIO_WritePin(GPIOA, rows[i], GPIO_PIN_SET);
 
@@ -92,7 +92,7 @@ void scan_matrix(void) {
 void process_matrix(void) {
   uint16_t key;
 
-  for(int i = 0, i < MATRIX_ROWS; i++) {
+  for(int i = 0; i < MATRIX_ROWS; i++) {
       if(current_matrix[i] != 0) {
         uint8_t pos = get_bit_position(current_matrix[i]);
         key = keymaps[0][i][pos];

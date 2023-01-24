@@ -1,6 +1,8 @@
 #ifndef KEYBOARD_H_
 #define KEYBOARD_H_
 
+#include "main.h"
+
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 14
 
