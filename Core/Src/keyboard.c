@@ -96,7 +96,7 @@ void process_matrix(void) {
       if(current_matrix[i] != 0) {
         uint8_t pos = get_bit_position(current_matrix[i]);
         key = keymaps[0][i][pos];
-        printf("[asus]PKey: %04x\r\n", key);
+        printf("[asus]PKey (%d): %04x\r\n", i, key);
       }
   }
 
