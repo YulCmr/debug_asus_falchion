@@ -1,7 +1,9 @@
 #include "keyboard.h"
 
-uint16_t current_matrix[6];
+//uint16_t current_matrix[6];
 uint16_t old_matrix[6];
+
+bool current_matrix[MATRIX_ROWS][16];
 
 /* Matrix storage :
   {0xFFFF},
@@ -56,7 +58,7 @@ const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 uint8_t get_bit_position(uint16_t n) {
   // if (!isPowerOfTwo(n))
   //     return -1;
-  uint8_t i = 1, pos = 1;
+  uint8_t i = 1, pos = 0;
 
   // Iterate through bits of n till we find a set bit
   // i&n will be non-zero only when 'i' and 'n' have a set bit
@@ -71,8 +73,9 @@ uint8_t get_bit_position(uint16_t n) {
 }
 
 void scan_matrix(void) {
+  uint16_t mat;
   /* Reset current matrix before a new read */
-  memset(current_matrix, 0x00, sizeof(current_matrix));
+  memset(current_matrix, 0x0, sizeof(current_matrix));
 
   /* Read current matrix */
   for(int i = 0; i < MATRIX_ROWS; i++) {
@@ -84,16 +87,15 @@ void scan_matrix(void) {
 
     /* Store each GPIO Read in current matrix */
     for(int j = 0; j < MATRIX_COLS; j++) {
-      current_matrix[i] |= (HAL_GPIO_ReadPin(GPIOC, cols[j])&1)<<j;
+      current_matrix[i][j] = HAL_GPIO_ReadPin(GPIOC, cols[j]);
+      //current_matrix[i] |= (HAL_GPIO_ReadPin(GPIOC, cols[j])&1)<<j;
     }
   }
 
-  printf("%04x\r\n", current_matrix[0]);
-  printf("%04x\r\n", current_matrix[1]);
-  printf("%04x\r\n", current_matrix[2]);
-  printf("%04x\r\n", current_matrix[3]);
-  printf("%04x\r\n", current_matrix[4]);
-  printf("%04x\r\n", current_matrix[5]);
+  for(int i = 0; i < 6, i++) {
+    memcpy(&mat, current_matrix[i], 2);
+    printf("%04x\r\n", mat);
+  }
 }
 
 void process_matrix(void) {
