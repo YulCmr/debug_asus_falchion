@@ -82,17 +82,18 @@ void scan_matrix(void) {
     /* Turn off all rows */
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_All, GPIO_PIN_RESET);
 
+    HAL_Delay(1);
+
     /* Turn on required row */
     HAL_GPIO_WritePin(GPIOA, rows[i], GPIO_PIN_SET);
 
     /* Store each GPIO Read in current matrix */
     for(int j = 0; j < MATRIX_COLS; j++) {
       current_matrix[i][j] = HAL_GPIO_ReadPin(GPIOC, cols[j]);
-      //current_matrix[i] |= (HAL_GPIO_ReadPin(GPIOC, cols[j])&1)<<j;
     }
   }
 
-  for(int i = 0; i < 6, i++) {
+  for(int i = 0; i < 6; i++) {
     memcpy(&mat, current_matrix[i], 2);
     printf("%04x\r\n", mat);
   }
