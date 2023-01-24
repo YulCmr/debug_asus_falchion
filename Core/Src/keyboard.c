@@ -3,7 +3,7 @@
 //uint16_t current_matrix[6];
 uint16_t old_matrix[6];
 
-bool current_matrix[MATRIX_ROWS][16];
+bool current_matrix[MATRIX_ROWS][MATRIX_COLS];
 
 /* Matrix storage :
   {0xFFFF},
@@ -73,9 +73,8 @@ uint8_t get_bit_position(uint16_t n) {
 }
 
 void scan_matrix(void) {
-  uint16_t mat;
   /* Reset current matrix before a new read */
-  memset(current_matrix, 0x0, sizeof(current_matrix));
+  memset(current_matrix, 0x00, sizeof(current_matrix));
 
   /* Read current matrix */
   for(int i = 0; i < MATRIX_ROWS; i++) {
@@ -89,14 +88,16 @@ void scan_matrix(void) {
 
     /* Store each GPIO Read in current matrix */
     for(int j = 0; j < MATRIX_COLS; j++) {
-      current_matrix[i][j] = HAL_GPIO_ReadPin(GPIOC, cols[j]);
+      current_matrix[i] |= (HAL_GPIO_ReadPin(GPIOC, cols[j])&1)<<j;
     }
   }
 
-  for(int i = 0; i < 6; i++) {
-    memcpy(&mat, current_matrix[i], 2);
-    printf("%04x\r\n", mat);
-  }
+  printf("%04x\r\n", current_matrix[0]);
+  printf("%04x\r\n", current_matrix[1]);
+  printf("%04x\r\n", current_matrix[2]);
+  printf("%04x\r\n", current_matrix[3]);
+  printf("%04x\r\n", current_matrix[4]);
+  printf("%04x\r\n", current_matrix[5]);
 }
 
 void process_matrix(void) {
