@@ -1,9 +1,9 @@
 #include "keyboard.h"
 
-//uint16_t current_matrix[6];
+uint16_t current_matrix[6];
 uint16_t old_matrix[6];
 
-bool current_matrix[MATRIX_ROWS][MATRIX_COLS];
+//bool current_matrix[MATRIX_ROWS][MATRIX_COLS];
 
 /* Matrix storage :
   {0xFFFF},
@@ -104,12 +104,17 @@ void process_matrix(void) {
   uint16_t key;
 
   for(int i = 0; i < MATRIX_ROWS; i++) {
-      if(current_matrix[i] != 0) {
-        uint8_t pos = get_bit_position(current_matrix[i]);
-        key = keymaps[0][i][pos];
-        printf("[asus]PKey (%d): %d/%04x\r\n", i, pos, key);
+      if(memcmp(old_matrix, current_matrix, sizeof(current_matrix) != 0) {
+        uint16_t diff_row = old_matrix^current_matrix;
+        for(int j = 0; j < MATRIX_COLS, j++) {
+          //TODO - Differentiel ou non ?
+        }
+        // key = keymaps[0][i][pos];
+        // printf("[asus]PKey (%d): %d/%04x\r\n", i, pos, key);
       }
   }
+
+  memcpy(old_matrix, current_matrix, sizeof(current_matrix));
 
 }
 
@@ -141,7 +146,7 @@ void print_keymap(void) {
 //         KC_TAB,   KC_Q,     KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,      KC_P,     KC_LBRC,   KC_RBRC,
 //         KC_CAPS,  KC_A,     KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,      KC_SCLN,  KC_QUOT,   KC_NONUS_HASH,  KC_ENT,
 //         KC_LSFT,  KC_BSLS,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM,   KC_DOT,   KC_SLSH,                   KC_RSFT,
-//         KC_LCTL,  KC_LWIN,  KC_LALT,                   KC_SPC,                             KC_RALT,   MO(2),               KC_RCTL,        KC_BSPC,
+//         KC_LCTL,  KC_LWIN,  KC_LALT,                   KC_SPC,                             KC_RALT,   MO(3),               KC_RCTL,        KC_BSPC,
 //         KC_INS,   KC_DEL,            KC_PGUP, KC_PGDN,                                                KC_DOWN,  KC_RGHT,   KC_LEFT,        KC_UP
 //     ),
 //     [2] = LAYOUT_96_iso(
