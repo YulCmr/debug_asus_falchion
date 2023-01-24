@@ -37,6 +37,7 @@ void gpio_handler(int argc, char argv[8][16])
 	else if(shell_check_cmd(argv[1], "test")) {
 		scan_matrix();
 		process_matrix();
+		return;
 	}
 
 	while(1) {
