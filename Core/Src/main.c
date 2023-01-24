@@ -402,15 +402,13 @@ static void MX_GPIO_Init(void)
                           |col_7_Pin|col_8_Pin|col_9_Pin|col_10_Pin
                           |col_11_Pin|col_12_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : reset_radio_Pin */
   GPIO_InitStruct.Pin = reset_radio_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF15_EVENTOUT;
   HAL_GPIO_Init(reset_radio_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : row_0_Pin row_1_Pin row_2_Pin row_3_Pin
@@ -418,15 +416,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = row_0_Pin|row_1_Pin|row_2_Pin|row_3_Pin
                           |row_4_Pin|row_5_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : matrix_Pin */
   GPIO_InitStruct.Pin = matrix_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(matrix_GPIO_Port, &GPIO_InitStruct);
 
 }
