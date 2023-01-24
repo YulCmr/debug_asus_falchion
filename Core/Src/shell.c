@@ -77,6 +77,58 @@ void i2c_handler(int argc, char argv[8][16])
 	}
 }
 
+void leds_handler(int argc, char argv[8][16])
+{
+	I2C_HandleTypeDef hi2c;
+	uint8_t count = 0;
+	uint8_t addresses[10];
+	uint8_t led;
+
+	if(shell_check_cmd(argv[1], "init")) {
+		IS31FL3737_init(161);
+		IS31FL3737_init(191);
+		printf("[asus]Init ok\r\n");
+	}
+	else if(shell_check_cmd(argv[1], "on")) {
+		memcpy(&hi2c, &hi2c1, sizeof(I2C_HandleTypeDef));
+	}
+	else if(shell_check_cmd(argv[1], "off")) {
+		memcpy(&hi2c, &hi2c2, sizeof(I2C_HandleTypeDef));
+	}
+	else if(shell_check_cmd(argv[1], "a")) {
+		// Unlock the command register.
+    IS31FL3737_write_register(161, 0xFE, 0xC5);
+
+    // Select PG1
+    IS31FL3737_write_register(161, 0xFD, 0x01);
+
+    for (int i = 0x00; i <= 0xBF; i++) {
+        IS31FL3737_write_register(161, i, 0x00);
+    }
+
+		led = atoi(argv[2]);
+
+		IS31FL3737_write_register(161, led, 0xFF);
+	}
+	else if(shell_check_cmd(argv[1], "z")) {
+		// Unlock the command register.
+    IS31FL3737_write_register(191, 0xFE, 0xC5);
+
+    // Select PG1
+    IS31FL3737_write_register(191, 0xFD, 0x01);
+
+    for (int i = 0x00; i <= 0xBF; i++) {
+        IS31FL3737_write_register(191, i, 0x00);
+    }
+
+		led = atoi(argv[2]);
+
+		IS31FL3737_write_register(191, led, 0xFF);
+	}
+
+
+}
+
 uint8_t shell_process_cmd(char* cmd)
 {
   int i=0;
@@ -114,6 +166,9 @@ uint8_t shell_process_cmd(char* cmd)
 	}
 	else if(shell_check_cmd(bdown[0], "gpio")) {
 		gpio_handler(j, bdown);
+	}
+	else if(shell_check_cmd(bdown[0], "leds")) {
+		leds_handler(j, bdown);
 	}
 
 	return 0;

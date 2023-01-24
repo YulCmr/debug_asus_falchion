@@ -31,10 +31,13 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
-#include  <string.h>
+#include "stdio.h"
+#include "string.h"
+#include "stdbool.h"
+#include "stdint.h"
 #include "shell.h"
 #include "usbd_cdc_if.h"
+#include "is31fl3737.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
