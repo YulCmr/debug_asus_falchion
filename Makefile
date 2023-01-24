@@ -39,6 +39,7 @@ C_SOURCES =  \
 Core/Src/main.c \
 Core/Src/shell.c \
 Core/Src/is31fl3737.c \
+Core/Src/keyboard.c \
 Core/Src/stm32l5xx_it.c \
 Core/Src/stm32l5xx_hal_msp.c \
 USB_Device/Target/usbd_conf.c \

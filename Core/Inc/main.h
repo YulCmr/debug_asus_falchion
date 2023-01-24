@@ -38,6 +38,7 @@ extern "C" {
 #include "shell.h"
 #include "usbd_cdc_if.h"
 #include "is31fl3737.h"
+#include "keyboard.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
