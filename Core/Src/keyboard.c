@@ -87,6 +87,13 @@ void scan_matrix(void) {
       current_matrix[i] |= (HAL_GPIO_ReadPin(GPIOC, cols[j])&1)<<j;
     }
   }
+
+  printf("%04x\r\n", current_matrix[0]);
+  printf("%04x\r\n", current_matrix[1]);
+  printf("%04x\r\n", current_matrix[2]);
+  printf("%04x\r\n", current_matrix[3]);
+  printf("%04x\r\n", current_matrix[4]);
+  printf("%04x\r\n", current_matrix[5]);
 }
 
 void process_matrix(void) {
@@ -96,7 +103,7 @@ void process_matrix(void) {
       if(current_matrix[i] != 0) {
         uint8_t pos = get_bit_position(current_matrix[i]);
         key = keymaps[0][i][pos];
-        printf("[asus]PKey (%d): %04x\r\n", i, key);
+        printf("[asus]PKey (%d): %d/%04x\r\n", i, pos, key);
       }
   }
 
@@ -105,7 +112,7 @@ void process_matrix(void) {
 void print_keymap(void) {
 
   for(int i = 0; i < MATRIX_ROWS; i++) {
-    for(int j = 0; i < MATRIX_COLS; j++) {
+    for(int j = 0; j < MATRIX_COLS; j++) {
       printf("%04x ", keymaps[0][i][j]);
     }
     printf("\r\n");
