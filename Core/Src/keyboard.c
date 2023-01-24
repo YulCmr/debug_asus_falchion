@@ -25,8 +25,7 @@ uint16_t cols[MATRIX_COLS] = {GPIO_PIN_0,
                               GPIO_PIN_10,
                               GPIO_PIN_11,
                               GPIO_PIN_12,
-                              GPIO_PIN_13,
-                              GPIO_PIN_14
+                              GPIO_PIN_13
                             };
 
 uint16_t rows[MATRIX_ROWS] = {GPIO_PIN_0,
