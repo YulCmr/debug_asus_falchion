@@ -78,6 +78,7 @@ void scan_matrix(void) {
   for(int i = 0; i < MATRIX_ROWS; i++) {
     /* Turn off all rows */
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_All, GPIO_PIN_RESET);
+
     /* Turn on required row */
     HAL_GPIO_WritePin(GPIOA, rows[i], GPIO_PIN_SET);
 
@@ -97,6 +98,17 @@ void process_matrix(void) {
         key = keymaps[0][i][pos];
         printf("[asus]PKey (%d): %04x\r\n", i, key);
       }
+  }
+
+}
+
+void print_keymap(void) {
+
+  for(int i = 0; i < MATRIX_ROWS; i++) {
+    for(int j = 0; i < MATRIX_COLS; j++) {
+      printf("%04x ", keymaps[0][i][j]);
+    }
+    printf("\r\n");
   }
 
 }

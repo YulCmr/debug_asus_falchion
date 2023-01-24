@@ -39,6 +39,10 @@ void gpio_handler(int argc, char argv[8][16])
 		process_matrix();
 		return;
 	}
+	else if(shell_check_cmd(argv[1], "kb")) {
+		print_keymap();
+		return;
+	}
 
 	while(1) {
 		for(int i = 0; i < 16; i++) {
